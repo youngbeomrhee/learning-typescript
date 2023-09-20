@@ -4,5 +4,9 @@
   "main": "index.js",
   "repository": "https://github.com/youngbeomrhee/learning-typescript.git",
   "author": "이영범 <youngbeomrhee@zigbang.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "prettier": "^2.3.2",
+    "typescript": "^5.2.2"
+  }
 }
