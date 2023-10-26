@@ -77,7 +77,6 @@
     value: Value
   }
 
-  ;[1, 2, 3].pop
   function getLast<Value>(node: LinkedNode<Value>): Value {
     return node.next ? getLast(node.next) : node.value
   }
