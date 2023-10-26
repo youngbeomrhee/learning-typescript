@@ -400,17 +400,4 @@
   }
 }
 
-interface IA {
-  new <T>(
-    executor: (a: (value: T) => void, b: (reason?: any) => void) => void,
-  ): void
-}
-// declare var A: IA
-class A implements IA {
-  constructor(a: (value: T) => void, b: (reason?: any) => void) => void {
-    
-  }
-}
-new A(() => {})
-
 export default {}
