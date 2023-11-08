@@ -112,7 +112,7 @@
     }
   }
 
-  const storage = new Secret(1, 'a')
+  const storage = new Secret(1, 'a') // const storage: Secret<number, string>
   const v = storage.getValue(1)
   const v2 = storage.getValue(2)
 
@@ -128,7 +128,6 @@
       this.#cb(i)
     }
   }
-
   new CurriedCB((i: string) => console.log(i.length))
   new CurriedCB((i) => console.log(i.length)) // 'i' is of type 'unknown'.ts(18046)
 
@@ -136,10 +135,10 @@
   new CurriedCB<string>((i) => console.log(i.length))
 
   // 10.3.2 제네릭 클래스 확장
-  class Quote<T> {
-    lines: T
+  class Quote<Lines> {
+    lines: Lines
 
-    constructor(lines: T) {
+    constructor(lines: Lines) {
       this.lines = lines
     }
   }
@@ -152,9 +151,11 @@
 
   new Quote('i say').lines
   new Quote([1, 2, 3, 4, 5]).lines
+  new Quote(1).lines
+  new Quote(true).lines
 
   new SpokenQuote(['I say', 'You say']).lines
-  new SpokenQuote([1, 2, 3, 4, 5]).lines
+  new SpokenQuote([1, 2, 3, 4, 5]).lines // Type 'number' is not assignable to type 'string'.ts(2322)
 
   class AttributedQuote<Value> extends Quote<Value> {
     speaker: string
@@ -168,6 +169,8 @@
     }
   }
   new AttributedQuote('I AM WHO I AM', 'God')
+  new AttributedQuote(1, 'I')
+  new AttributedQuote(true, 'You')
 
   // 10.3.3 제네릭 인터페이스 구현
   interface ActingCredit<Role> {
@@ -204,7 +207,7 @@
   }
 
   const fp = new FactoryPair('role')
-  fp.createPair(1)
+  const p1 = fp.createPair(1)
   fp.createPair('a')
 
   // 10.3.5 정적 클래스 제네릭
@@ -239,7 +242,7 @@
   }
   type Result<Data> = FailureResult | SuccessfulResult<Data>
 
-  function handleResult(result: Result<String[]>) {
+  function handleResult(result: Result<string[]>) {
     if (result.succeed) {
       console.log(result.data.join('\n'))
     } else {
