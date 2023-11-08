@@ -214,15 +214,33 @@
 // 7.4.1 이름이 충돌되는 멤버
 {
   interface IMerged {
-    method(): string
+    method(a: string): string
     p: string
     property: () => string
   }
   interface IMerged {
-    // 메서드는 오버라이드 가능
-    method(): number
-    // 속성은 오버라이드 불가
+    // 메서드는 오버로딩 가능
+    method(a: number): number
+    // 속성은 오버로딩 불가
     property: () => number
     p: number
+  }
+
+  function useIm2(im: IMerged) {
+    const a: number = im.method('s')
+  }
+}
+
+{
+  interface Checkable {
+    check(name: string | number): boolean
+  }
+
+  class NameChecker implements Checkable {
+    check(s: string) {
+      // Notice no error here
+      return s.toLowerCase() === 'ok'
+      //         ^?
+    }
   }
 }
