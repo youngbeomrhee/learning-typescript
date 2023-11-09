@@ -1,0 +1,3 @@
+describe('jestMocking', () => {
+  it('test', () => {})
+})
